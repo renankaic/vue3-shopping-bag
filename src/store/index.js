@@ -3,13 +3,18 @@ import axios from 'axios'
 
 export default createStore({
   state: {
-    products: [1, 2, 3]
+    products: [1, 2, 3],
+    productsInBag: []
   },
   mutations: {
     //Create an mutation to be called by an action and commit the change to state
 
     loadProducts(state, products) {
       state.products = products
+    },
+
+    addToBag(state, product) {
+      state.productsInBag.push(product)
     }
     
   },
@@ -22,6 +27,10 @@ export default createStore({
         .then(response => {
           commit('loadProducts', response.data)
         })
+    },
+    
+    addToBag({ commit }, product) {
+      commit('addToBag', product)
     }
 
   },
