@@ -15,11 +15,16 @@ export default createStore({
 
     addToBag(state, product) {
       state.productsInBag.push(product)
+    },
+
+    removeFromBag(state, productId){
+      let updatedBag = state.productsInBag.filter(prod => prod.id != productId)
+      state.productsInBag = updatedBag
     }
     
   },
   actions: {
-    //Create an action to be called from component
+    //Create an action to be called from components : 0 
 
     loadProducts({ commit }) {
       axios
@@ -31,6 +36,10 @@ export default createStore({
     
     addToBag({ commit }, product) {
       commit('addToBag', product)
+    },
+
+    removeFromBag({ commit }, productId) {
+      commit('removeFromBag', productId)
     }
 
   },
